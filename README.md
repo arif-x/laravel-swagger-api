@@ -17,6 +17,7 @@
 - Run `php artisan key:generate`.
 - Run `php artisan migrate:fresh --seed`.
 - Run `php artisan passport:install --force`.
+- Run `php artisan l5-swagger:generate`.
 - Run `php artisan serve`.
 
 ## About Laravel
