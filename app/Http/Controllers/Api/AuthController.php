@@ -219,7 +219,7 @@ class AuthController extends Controller
      *           @OA\Schema(
      *                example={
      *                    "status": "true",
-     *                    "token_type": "Login Sukses",
+     *                    "token_type": "Logout Sukses",
      *                    "data": {}
      *                }
      *          )
@@ -233,7 +233,7 @@ class AuthController extends Controller
      *           @OA\Schema(
      *                example={
      *                    "status": "false",
-     *                    "message": "Login Gagal",
+     *                    "message": "Logout Gagal",
      *                    "data": null
      *                }
      *           )
