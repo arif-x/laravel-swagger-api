@@ -15,7 +15,7 @@ class Response {
     public function show($data){
         $response = [
             'status' => true,
-            'message' => 'Single data has successfully retrieved',
+            'message' => 'Single Data berhasil ditampilkan',
             'data' => $data
         ];
         return response()->json($response, 200);

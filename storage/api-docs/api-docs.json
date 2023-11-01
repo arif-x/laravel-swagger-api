@@ -248,6 +248,32 @@
                 "summary": "Get list of contacts",
                 "description": "Returns list of contacts",
                 "operationId": "ContactIndex",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -321,6 +347,32 @@
                 "summary": "Insert contact",
                 "description": "Create contact",
                 "operationId": "ContactStore",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "contact",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -396,6 +448,16 @@
                 "summary": "Get contact by ID",
                 "description": "Returns contact by ID",
                 "operationId": "ContactShow",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -683,64 +745,6 @@
         }
     },
     "components": {
-        "parameters": {
-            "search": {
-                "name": "search",
-                "in": "query",
-                "required": false,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "sort": {
-                "name": "sort",
-                "in": "query",
-                "required": false,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "limit": {
-                "name": "limit",
-                "in": "query",
-                "required": false,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "id": {
-                "name": "id",
-                "in": "path",
-                "required": true,
-                "schema": {
-                    "type": "integer"
-                }
-            },
-            "type": {
-                "name": "type",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "name": {
-                "name": "name",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "contact": {
-                "name": "contact",
-                "in": "query",
-                "required": true,
-                "schema": {
-                    "type": "string"
-                }
-            }
-        },
         "securitySchemes": {
             "bearer": {
                 "type": "apiKey",

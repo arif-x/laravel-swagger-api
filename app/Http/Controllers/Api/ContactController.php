@@ -30,7 +30,32 @@ class ContactController extends Controller
      *  {"bearer": {}},
      *   },
      * summary="Get list of contacts",
-     *     description="Returns list of contacts",
+     * description="Returns list of contacts",
+     * 
+     * @OA\Parameter(
+     *      name="search",
+     *      in="query",
+     *      required=false,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *  ),
+     *  @OA\Parameter(
+     *      name="sort",
+     *      in="query",
+     *      required=false,
+     *      @OA\Schema(
+     *          type="string"
+     *      )
+     *  ),
+     *  @OA\Parameter(
+     *      name="limit",
+     *      in="query",
+     *      required=false,
+     *      @OA\Schema(
+     *        type="string"
+     *      )
+     *  ),
      *     @OA\Response(
      *        response=200,
      *         description="Success",
@@ -88,30 +113,6 @@ class ContactController extends Controller
      *      )
      *   )
      * ),
-     * @OA\Parameter(
-     *      name="search",
-     *      in="query",
-     *      required=false,
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *  ),
-     *  @OA\Parameter(
-     *      name="sort",
-     *      in="query",
-     *      required=false,
-     *      @OA\Schema(
-     *          type="string"
-     *      )
-     *  ),
-     *  @OA\Parameter(
-     *      name="limit",
-     *      in="query",
-     *      required=false,
-     *      @OA\Schema(
-     *        type="string"
-     *      )
-     *  ),
      * )
      */
     public function index(Request $request){
@@ -131,7 +132,15 @@ class ContactController extends Controller
      *    {"bearer": {}},
      * },
      * summary="Get contact by ID",
-     *   description="Returns contact by ID",
+     * description="Returns contact by ID",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="integer"
+     *     )
+     *   ),
      *   @OA\Response(
      *      response=200,
      *       description="Success",
@@ -201,16 +210,8 @@ class ContactController extends Controller
      *                }
      *           )
      *      )
-     *   )
-     * ),
-     *   @OA\Parameter(
-     *     name="id",
-     *     in="path",
-     *     required=true,
-     *     @OA\Schema(
-     *         type="integer"
-     *     )
-     *    ),
+     *    )
+     *  ),
      * )
      */
     public function show($id){
@@ -231,6 +232,31 @@ class ContactController extends Controller
      *   },
      *      summary="Insert contact",
      *      description="Create contact",
+     * 
+     *   @OA\Parameter(
+     *      name="type",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="contact",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *        type="string"
+     *      )
+     *   ),
      *       @OA\Response(
      *          response=200,
      *           description="Success",
@@ -288,6 +314,35 @@ class ContactController extends Controller
      *          )
      *       )
      *   ),
+     * )
+     */
+    public function store(Request $request){
+        try {
+            return $this->repository->store($request);
+        } catch (\Exception $th) {
+            return $this->response->error($th->getMessage());
+        }
+    }
+
+    /**
+     * @OA\Put(
+     *      path="/api/contact/{id}",
+     *      operationId="ContactUpdate",
+     *      tags={"Contact"},
+     * security={
+     *  {"bearer": {}},
+     *   },
+     * summary="Update by ID",
+     * description="Update contact by ID",
+     * 
+     * @OA\Parameter(
+     *   name="id",
+     *   in="path",
+     *   required=true,
+     *   @OA\Schema(
+     *       type="integer"
+     *   )
+     * ),
      *   @OA\Parameter(
      *      name="type",
      *      in="query",
@@ -312,27 +367,6 @@ class ContactController extends Controller
      *        type="string"
      *      )
      *   ),
-     * )
-     */
-    public function store(Request $request){
-        try {
-            return $this->repository->store($request);
-        } catch (\Exception $th) {
-            return $this->response->error($th->getMessage());
-        }
-    }
-
-    /**
-     * @OA\Put(
-     *      path="/api/contact/{id}",
-     *      operationId="ContactUpdate",
-     *      tags={"Contact"},
-     * security={
-     *  {"bearer": {}},
-     *   },
-     * summary="Update by ID",
-     * description="Update contact by ID",
-     * 
      *   @OA\Response(
      *      response=200,
      *       description="Success",
@@ -401,38 +435,6 @@ class ContactController extends Controller
      *                    "data": {"messages": {}}
      *                }
      *           )
-     *      )
-     *   ),
-     * @OA\Parameter(
-     *   name="id",
-     *   in="path",
-     *   required=true,
-     *   @OA\Schema(
-     *       type="integer"
-     *   )
-     * ),
-     *   @OA\Parameter(
-     *      name="type",
-     *      in="query",
-     *      required=true,
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
-     *   @OA\Parameter(
-     *      name="name",
-     *      in="query",
-     *      required=true,
-     *      @OA\Schema(
-     *          type="string"
-     *      )
-     *   ),
-     *   @OA\Parameter(
-     *      name="contact",
-     *      in="query",
-     *      required=true,
-     *      @OA\Schema(
-     *        type="string"
      *      )
      *   ),
      * )
