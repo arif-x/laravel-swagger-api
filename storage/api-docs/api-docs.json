@@ -1,8 +1,12 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Authentication",
-        "version": "1.0"
+        "title": "Integration Swagger in Laravel Documentation",
+        "description": "Implementation of Swagger in Laravel",
+        "contact": {
+            "email": "sudo.ariffudin@gmail.com"
+        },
+        "version": "1.0.0"
     },
     "paths": {
         "/api/register": {
@@ -47,23 +51,47 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Registrasi Sukses",
+                                        "data": []
+                                    }
+                                }
+                            }
                         }
                     },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
                     "400": {
-                        "description": "Bad Request"
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "The :attr must be a valid :attr",
+                                        "data": null
+                                    }
+                                }
+                            }
+                        }
                     },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": null
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -97,20 +125,44 @@
                     "200": {
                         "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Login Sukses",
+                                        "data": []
+                                    }
+                                }
+                            }
                         }
                     },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
                     "400": {
-                        "description": "Bad Request"
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Login Gagal",
+                                        "data": null
+                                    }
+                                }
+                            }
+                        }
                     },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": null
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -125,22 +177,60 @@
                 "operationId": "Logout",
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Login Sukses",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Login Gagal",
+                                        "data": null
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthenticated"
+                        "description": "Unauntheticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Unauntheticated",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
                     },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": null
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -160,22 +250,62 @@
                 "operationId": "ContactIndex",
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Data berhasil ditampilkan",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Bad Request | Validation Error Message",
+                                        "data": null
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthenticated"
+                        "description": "Unauntheticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Unauntheticated",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
                     },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": {
+                                            "messages": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -191,50 +321,64 @@
                 "summary": "Insert contact",
                 "description": "Create contact",
                 "operationId": "ContactStore",
-                "parameters": [
-                    {
-                        "name": "type",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "contact",
-                        "in": "query",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Single Data berhasil ditambah",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Bad Request | Validation Error Message",
+                                        "data": null
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthenticated"
+                        "description": "Unauntheticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Unauntheticated",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
                     },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": {
+                                            "messages": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -252,34 +396,78 @@
                 "summary": "Get contact by ID",
                 "description": "Returns contact by ID",
                 "operationId": "ContactShow",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Single Data berhasil ditampilkan",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Bad Request | Validation Error Message",
+                                        "data": null
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "400": {
-                        "description": "Bad Request"
+                        "description": "Unauntheticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Unauntheticated",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "not found"
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Data tidak ditemukan",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": {
+                                            "messages": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -331,22 +519,76 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Data berhasil diupdate",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Bad Request | Validation Error Message",
+                                        "data": null
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "400": {
-                        "description": "Bad Request"
+                        "description": "Unauntheticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Unauntheticated",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "not found"
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Data tidak ditemukan",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": {
+                                            "messages": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -374,22 +616,62 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successful operation",
+                        "description": "Success",
                         "content": {
-                            "application/json": {}
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "true",
+                                        "token_type": "Data berhasil dihapus",
+                                        "data": []
+                                    }
+                                }
+                            }
                         }
                     },
                     "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "400": {
-                        "description": "Bad Request"
+                        "description": "Unauntheticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Unauntheticated",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "not found"
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Data tidak ditemukan",
+                                        "data": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": {
+                                        "status": "false",
+                                        "message": "Internal Error",
+                                        "data": {
+                                            "messages": []
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -401,6 +683,64 @@
         }
     },
     "components": {
+        "parameters": {
+            "search": {
+                "name": "search",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "sort": {
+                "name": "sort",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "limit": {
+                "name": "limit",
+                "in": "query",
+                "required": false,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "id": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "type": {
+                "name": "type",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "name": {
+                "name": "name",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "contact": {
+                "name": "contact",
+                "in": "query",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
         "securitySchemes": {
             "bearer": {
                 "type": "apiKey",

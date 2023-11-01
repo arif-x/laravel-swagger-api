@@ -3,21 +3,34 @@
 namespace App\Http\Controllers\Api;
    
 use App\Http\Controllers\Controller;
+use App\Helpers\Response;
 use Illuminate\Http\Request;
 use App\Repositories\Api\AuthRepository;
    
 /**
- * @OA\Info(title="Authentication", version="1.0")
+ * @OA\Info(
+ *      version="1.0.0",
+ *      title="Integration Swagger in Laravel Documentation",
+ *      description="Implementation of Swagger in Laravel",
+ *      @OA\Contact(
+ *          email="sudo.ariffudin@gmail.com"
+ *      )
+ * )
+ *
+ *
 */
 class AuthController extends Controller
 {
     
+    private $response;
     private $repository;
 
     public function __construct(
+        Response $response,
         AuthRepository $repository
     )
     {
+        $this->response = $response;
         $this->repository = $repository;    
     }
 
@@ -61,33 +74,55 @@ class AuthController extends Controller
      *      )
      *   ),
      *   @OA\Response(
-     *      response=201,
+     *      response=200,
      *       description="Success",
      *      @OA\MediaType(
      *           mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "true",
+     *                    "token_type": "Registrasi Sukses",
+     *                    "data": {}
+     *                }
+     *          )
      *      )
-     *   ),
-     *   @OA\Response(
-     *      response=401,
-     *       description="Unauthenticated"
      *   ),
      *   @OA\Response(
      *      response=400,
-     *      description="Bad Request"
+     *      description="Bad Request",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "The :attr must be a valid :attr",
+     *                    "data": null
+     *                }
+     *           )
+     *      )
      *   ),
      *   @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
+     *      response=500,
+     *      description="Internal Error",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "Internal Error",
+     *                    "data": null
+     *                }
+     *           )
      *      )
+     *   )
      *)
      **/
     public function register(Request $request){
-        $data = $this->repository->register($request);
-        return $data;
+        try {
+            return $this->repository->register($request);
+        } catch (\Exception $th) {
+            return $this->response->error($th->getMessage());
+        }
     }
    
     /**
@@ -118,29 +153,51 @@ class AuthController extends Controller
      *       description="Success",
      *      @OA\MediaType(
      *           mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "true",
+     *                    "token_type": "Login Sukses",
+     *                    "data": {}
+     *                }
+     *          )
      *      )
-     *   ),
-     *   @OA\Response(
-     *      response=401,
-     *       description="Unauthenticated"
      *   ),
      *   @OA\Response(
      *      response=400,
-     *      description="Bad Request"
+     *      description="Bad Request",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "Login Gagal",
+     *                    "data": null
+     *                }
+     *           )
+     *      )
      *   ),
      *   @OA\Response(
-     *      response=404,
-     *      description="not found"
-     *   ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
+     *      response=500,
+     *      description="Internal Error",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "Internal Error",
+     *                    "data": null
+     *                }
+     *           )
      *      )
+     *   )
      *)
      **/
     public function login(Request $request){
-        $data = $this->repository->login($request);
-        return $data;
+        try {
+            return $this->repository->login($request);
+        } catch (\Exception $th) {
+            return $this->response->error($th->getMessage());
+        }
     }
 
     /**
@@ -149,36 +206,74 @@ class AuthController extends Controller
      *      operationId="Logout",
      *      tags={"Auth"},
      * security={
-     *  {"bearer": {}},
-     *   },
-     *      summary="Logout",
-     *      description="logout Bro!",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
+     * {
+     *     "bearer": {}},
+     * },
+     * summary="Logout",
+     * description="logout Bro!",
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
      *           mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "true",
+     *                    "token_type": "Login Sukses",
+     *                    "data": {}
+     *                }
+     *          )
      *      )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     * @OA\Response(
+     *   ),
+     *   @OA\Response(
      *      response=400,
-     *      description="Bad Request"
+     *      description="Bad Request",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "Login Gagal",
+     *                    "data": null
+     *                }
+     *           )
+     *      )
      *   ),
-     * @OA\Response(
-     *      response=404,
-     *      description="not found"
+     *   @OA\Response(
+     *      response=401,
+     *      description="Unauntheticated",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "Unauntheticated",
+     *                    "data": {}
+     *                }
+     *           )
+     *      )
      *   ),
-     *  )
+     *   @OA\Response(
+     *      response=500,
+     *      description="Internal Error",
+     *      @OA\MediaType(
+     *      mediaType="application/json",
+     *           @OA\Schema(
+     *                example={
+     *                    "status": "false",
+     *                    "message": "Internal Error",
+     *                    "data": null
+     *                }
+     *           )
+     *      )
+     *   )
+     * )
      */
     public function logout(Request $request){
-        return $this->repository->logout($request);
+        try {
+            return $this->repository->logout($request);
+        } catch (\Exception $th) {
+            return $this->response->error($th->getMessage());
+        }
     }
 }

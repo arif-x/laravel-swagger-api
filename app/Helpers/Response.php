@@ -48,7 +48,7 @@ class Response {
         return response()->json($response, 200);
     }
 
-    public function empty($data = []){
+    public function empty($data = null){
         $response = [
             'status' => true,
             'message' => 'Data berhasil ditampilkan tetapi kosong',
@@ -57,7 +57,7 @@ class Response {
         return response()->json($response, 200);
     }
 
-    public function notFound($data = []){
+    public function notFound($data = null){
         $response = [
             'status' => false,
             'message' => 'Data tidak ditemukan',
@@ -66,7 +66,7 @@ class Response {
         return response()->json($response, 404);
     }
 
-    public function storeError($data = []){
+    public function storeError($data = null){
         $response = [
             'status' => false,
             'message' => 'Error menambah data',
@@ -75,7 +75,7 @@ class Response {
         return response()->json($response, 500);
     }
 
-    public function updateError($data = []){
+    public function updateError($data = null){
         $response = [
             'status' => false,
             'message' => 'Error mengedit data',
@@ -84,7 +84,7 @@ class Response {
         return response()->json($response, 500);
     }
 
-    public function destroyError($data = []){
+    public function destroyError($data = null){
         $response = [
             'status' => false,
             'message' => 'Error menghapus data',
@@ -93,7 +93,7 @@ class Response {
         return response()->json($response, 500);
     }
 
-    public function validationError($message, $data = []){
+    public function validationError($message, $data = null){
         $valArr = array();
         foreach ($message->toArray() as $key => $value) { 
             $errStr = $value[0];
@@ -166,5 +166,14 @@ class Response {
             'data' => $data
         ];
         return response()->json($response, 401);
+    }
+
+    public function error($data){
+        $response = [
+            'status' => false,
+            'message' => 'Internal Error',
+            'data' => $data
+        ];
+        return response()->json($response, 500);
     }
 }
