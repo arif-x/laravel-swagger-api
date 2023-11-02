@@ -141,10 +141,10 @@ class Response {
         return response()->json($response, 200);
     }
 
-    public function loginError($data){
+    public function loginError($data = null){
         $response = [
             'status' => false,
-            'message' => 'Login Gagal',
+            'message' => 'Login Gagal, Data yang Anda Masukkan Tidak Ada pada Sistem Kami',
             'data' => $data
         ];
         return response()->json($response, 402);

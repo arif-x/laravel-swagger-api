@@ -33,7 +33,7 @@ class AuthRepository
             $user = User::create($input);
             if($user){
                 $data['token'] =  $user->createToken('MyApp')->accessToken;
-                $data['name'] =  $user->name;
+                $data['user'] =  $user;
                 return $this->response->register($data);
             } else {
                 return $this->response->registerError($user);
@@ -45,12 +45,12 @@ class AuthRepository
         $auth = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
         if($auth){ 
             $user = Auth::user(); 
-            $data['token'] =  $user->createToken('MyApp')-> accessToken; 
-            $data['name'] =  $user->name;
+            $data['token'] =  $user->createToken('MyApp')->accessToken; 
+            $data['user'] =  $user;
    
             return $this->response->login($data);
         } else{ 
-            return $this->response->loginError($auth);
+            return $this->response->loginError();
         } 
     }
 

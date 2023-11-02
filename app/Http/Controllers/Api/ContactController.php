@@ -63,10 +63,109 @@ class ContactController extends Controller
      *             mediaType="application/json",
      *             @OA\Schema(
      *                example={
-     *                    "status": "true",
-     *                    "token_type": "Data berhasil ditampilkan",
-     *                    "data": {}
-     *                }
+     *                   "status": true,
+     *                   "message": "Data berhasil ditampilkan",
+     *                   "data": {
+     *                       "current_page": 1,
+     *                       "data": {
+     *                           {
+     *                               "id": 1,
+     *                               "type": "Telp",
+     *                               "name": "Jayeng Saragih",
+     *                               "contact": "0949 1989 871",
+     *                               "created_at": "2023-11-01T07:31:40.000000Z",
+     *                               "updated_at": "2023-11-01T07:31:40.000000Z"
+     *                           }
+     *                           },
+     *                           "first_page_url": "http://localhost:8001/api/contact?page=1",
+     *                           "from": 1,
+     *                           "last_page": 58,
+     *                           "last_page_url": "http://localhost:8001/api/contact?page=58",
+     *                           "links": {
+     *                              {
+     *                                  "url": null,
+     *                                  "label": "&laquo; Previous",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=1",
+     *                                  "label": "1",
+     *                                  "active": true
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=2",
+     *                                  "label": "2",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=3",
+     *                                  "label": "3",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=4",
+     *                                  "label": "4",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=5",
+     *                                  "label": "5",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=6",
+     *                                  "label": "6",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=7",
+     *                                  "label": "7",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=8",
+     *                                  "label": "8",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=9",
+     *                                  "label": "9",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=10",
+     *                                  "label": "10",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": null,
+     *                                  "label": "...",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=57",
+     *                                  "label": "57",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=58",
+     *                                  "label": "58",
+     *                                  "active": false
+     *                              },
+     *                              {
+     *                                  "url": "http://localhost:8001/api/contact?page=2",
+     *                                  "label": "Next &raquo;",
+     *                                  "active": false
+     *                              }
+     *                           },
+     *                           "next_page_url": "http://localhost:8001/api/contact?page=2",
+     *                           "path": "http://localhost:8001/api/contact",
+     *                           "per_page": "1",
+     *                           "prev_page_url": null,
+     *                           "to": 1,
+     *                           "total": 58
+     *                       }
+     *                   }
      *             )
      *         )
      *      ),
@@ -77,7 +176,7 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Bad Request | Validation Error Message",
      *                    "data": null
      *                }
@@ -91,9 +190,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
-     *                    "message": "Unauntheticated",
-     *                    "data": {}
+     *                    "status": false,
+     *                    "message": "Token Invalid/Kadaluarsa",
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -105,7 +204,7 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Internal Error",
      *                    "data": {"messages": {}}
      *                }
@@ -148,10 +247,17 @@ class ContactController extends Controller
      *           mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "true",
+     *                    "status": true,
      *                    "token_type": "Single Data berhasil ditampilkan",
-     *                    "data": {}
-     *                }
+     *                    "data": {
+     *                       "type": "Oke",
+     *                       "name": "Name",
+     *                       "contact": "Contact",
+     *                       "updated_at": "2023-11-02T04:45:12.000000Z",
+     *                       "created_at": "2023-11-02T04:45:12.000000Z",
+     *                       "id": 103
+     *                   }
+     *               }
      *          )
      *      )
      *   ),
@@ -162,7 +268,7 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Bad Request | Validation Error Message",
      *                    "data": null
      *                }
@@ -176,9 +282,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
-     *                    "message": "Unauntheticated",
-     *                    "data": {}
+     *                    "status": false,
+     *                    "message": "Token Invalid/Kadaluarsa",
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -190,9 +296,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Data tidak ditemukan",
-     *                    "data": {}
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -204,7 +310,7 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Internal Error",
      *                    "data": {"messages": {}}
      *                }
@@ -264,10 +370,17 @@ class ContactController extends Controller
      *               mediaType="application/json",
      *               @OA\Schema(
      *                    example={
-     *                        "status": "true",
+     *                        "status": true,
      *                        "token_type": "Single Data berhasil ditambah",
-     *                        "data": {}
-     *                    }
+     *                        "data": {
+     *                           "type": "Oke",
+     *                           "name": "Name",
+     *                           "contact": "Contact",
+     *                           "updated_at": "2023-11-02T04:45:12.000000Z",
+     *                           "created_at": "2023-11-02T04:45:12.000000Z",
+     *                           "id": 103
+     *                       }
+     *                   }
      *              )
      *          )
      *       ),
@@ -278,7 +391,7 @@ class ContactController extends Controller
      *          mediaType="application/json",
      *               @OA\Schema(
      *                    example={
-     *                        "status": "false",
+     *                        "status": false,
      *                        "message": "Bad Request | Validation Error Message",
      *                        "data": null
      *                    }
@@ -292,7 +405,7 @@ class ContactController extends Controller
      *          mediaType="application/json",
      *               @OA\Schema(
      *                    example={
-     *                        "status": "false",
+     *                        "status": false,
      *                        "message": "Unauntheticated",
      *                        "data": {}
      *                    }
@@ -306,7 +419,7 @@ class ContactController extends Controller
      *          mediaType="application/json",
      *               @OA\Schema(
      *                    example={
-     *                        "status": "false",
+     *                        "status": false,
      *                        "message": "Internal Error",
      *                        "data": {"messages": {}}
      *                    }
@@ -374,9 +487,9 @@ class ContactController extends Controller
      *           mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "true",
+     *                    "status": true,
      *                    "token_type": "Data berhasil diupdate",
-     *                    "data": {}
+     *                    "data": 1
      *                }
      *          )
      *      )
@@ -388,7 +501,7 @@ class ContactController extends Controller
      *          mediaType="application/json",
      *               @OA\Schema(
      *                    example={
-     *                        "status": "false",
+     *                        "status": false,
      *                        "message": "Bad Request | Validation Error Message",
      *                        "data": null
      *                    }
@@ -402,9 +515,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
-     *                    "message": "Unauntheticated",
-     *                    "data": {}
+     *                    "status": false,
+     *                    "message": "Token Invalid/Kadaluarsa",
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -416,9 +529,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Data tidak ditemukan",
-     *                    "data": {}
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -430,7 +543,7 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Internal Error",
      *                    "data": {"messages": {}}
      *                }
@@ -472,9 +585,9 @@ class ContactController extends Controller
      *           mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "true",
+     *                    "status": true,
      *                    "token_type": "Data berhasil dihapus",
-     *                    "data": {}
+     *                    "data": true
      *                }
      *          )
      *      )
@@ -486,9 +599,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
-     *                    "message": "Unauntheticated",
-     *                    "data": {}
+     *                    "status": false,
+     *                    "message": "Token Invalid/Kadaluarsa",
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -500,9 +613,9 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Data tidak ditemukan",
-     *                    "data": {}
+     *                    "data": null
      *                }
      *           )
      *      )
@@ -514,7 +627,7 @@ class ContactController extends Controller
      *      mediaType="application/json",
      *           @OA\Schema(
      *                example={
-     *                    "status": "false",
+     *                    "status": false,
      *                    "message": "Internal Error",
      *                    "data": {"messages": {}}
      *                }
