@@ -129,7 +129,7 @@ class Response {
             'message' => 'Registrasi Gagal',
             'data' => $data
         ];
-        return response()->json($response, 402);
+        return response()->json($response, 401);
     }
     
     public function login($data){
